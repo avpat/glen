@@ -1,0 +1,76 @@
+version: '3'
+
+networks:
+  front_fronetendnet:
+    external: true
+
+volumes:
+  mysql:
+    driver: local
+
+services:
+
+  nginx:
+    image: nginx:stable-alpine
+    container_name: glenhawk-api
+    ports:
+      - "8000:80"
+    working_dir: /var/www/html
+    volumes:
+      - ./api:/var/www/html/
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - mysql
+
+  mysql:
+    image: mysql:5.7
+    container_name: glenhawk-mysql
+    restart: unless-stopped
+    tty: true
+    volumes:
+        - ./apidata:/var/lib/mysql
+        - ./mysql/my.cnf:/etc/mysql/my.cnf
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: glenhawkapi
+      MYSQL_USER: glenhawkapi
+      MYSQL_PASSWORD: azertyuiop1234567890!
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+
+  #App Service
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: glenhawk-php
+    restart: unless-stopped
+    tty: true
+    environment:
+      SERVICE_NAME: phpapp
+      SERVICE_TAGS: dev
+    working_dir: /var/www/html
+    volumes:
+      - ./api:/var/www/html
+    ports:
+      - "9000:9000"
+    links:
+    - mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: glenhawk-phpmyadmin
+    ports:
+    - "8085:80"
+    links:
+    - mysql
+    restart: unless-stopped
+    tty: true
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOST: mysql
+      SERVICE_NAME: phpmyadmin
+      SERVICE_TAGS: dev
