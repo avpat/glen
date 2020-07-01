@@ -6,6 +6,7 @@ class SurveyTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * creating 3 records
      *
      * @return void
      */

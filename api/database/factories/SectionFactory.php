@@ -10,7 +10,7 @@ $factory->define(Section::class, function (Faker $faker) {
         'survey_id'     => factory(App\Survey::class),
         'name'          => $faker->name,
         'description'   => $faker->text,
-        'status'      => $faker->numberBetween(0, 1)
+        'status'        => $faker->numberBetween(0, 1)
     ];
 });
 

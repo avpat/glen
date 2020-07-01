@@ -6,6 +6,7 @@ class RuleTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
+     * we are creating 20 records
      *
      * @return void
      */

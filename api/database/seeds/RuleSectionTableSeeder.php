@@ -5,9 +5,9 @@ use Illuminate\Database\Seeder;
 class RuleSectionTableSeeder extends Seeder
 {
 
-
     /**
      * Run the database seeds.
+     * Here we are attaching random rule to the section
      *
      * @return void
      */
@@ -20,6 +20,5 @@ class RuleSectionTableSeeder extends Seeder
                 $rules->random(rand(1, 3))->pluck('id')->toArray()
            );
         });
-
     }
 }
