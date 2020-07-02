@@ -16,30 +16,22 @@ use Faker\Generator as Faker;
 $factory->define(Rule::class, function (Faker $faker) {
 
     $rule = [
-        'age' => [
-            'borrower_age_min'  => 'integer|min:21',
-            'borrower_age_max'  => 'integer|max:75'
-        ],
-        'affordability' => [
-            'annual_income' => 'integer|min:40000',
-            'loan_amount'   => 'integer|max:3*',
-        ],
-        'finance' => [
-            'loan_length'   => 'integer|max:12',
-            'loan_amount'   => 'integer|max:500000',
-        ]
+        'income'        => ['Annual Income'         => 'numeric|min:40000|required'],
+        'age'           => ['Borrowers Age'         => 'numeric|min:21|max:75'],
+        'loan_capacity' => ['affordability'         => 'numeric|max:3*annual_income|required'],
+        'finance_term'  => ['Loan length in Months' => 'numeric|max:12|required'],
+        'finance_max'   => ['Loan Amount'           => 'numeric|max:500000|required']
     ];
 
     return [
         'rule' => serialize([
             $faker->randomElement(
                 [
-                    $rule['age']['borrower_age_min'],
-                    $rule['age']['borrower_age_max'],
-                    $rule['affordability']['annual_income'],
-                    $rule['affordability']['loan_amount'],
-                    $rule['finance']['loan_length'],
-                    $rule['finance']['loan_amount']
+                    $rule['income'],
+                    $rule['age'],
+                    $rule['loan_capacity'],
+                    $rule['finance_term'],
+                    $rule['finance_max']
                 ]
             )
         ])
