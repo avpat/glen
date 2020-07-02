@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use App\Rule;
 use App\Services\SurveyService;
 use App\Survey;
-
-
-
 use Illuminate\Http\Request;
 
 class SurveyController extends Controller
@@ -23,7 +20,7 @@ class SurveyController extends Controller
     public function index(Request $request)
     {
         //number 6 record has rules
-        $survey = Survey::find( 6);
+        $survey = Survey::find(6);
         //create a sample payload
         $payLoad = collect([
             'Annual Income'             => 30000,

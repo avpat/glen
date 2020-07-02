@@ -8,7 +8,7 @@ class Survey extends Model
 {
     protected $guarded = [];
 
-    protected  $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description'];
 
     protected $with = [ 'sections.rules'];
 
@@ -21,6 +21,4 @@ class Survey extends Model
     {
         return $this->hasMany('App\Section', 'survey_id');
     }
-
-
 }

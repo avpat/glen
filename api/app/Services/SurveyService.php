@@ -13,8 +13,7 @@ class SurveyService implements SurveyServiceInterface
 
     public function __construct(\ruleEvaluatorInterface $ruleEvaluator)
     {
-            $this->ruleEvaluator = $ruleEvaluator;
-
+        $this->ruleEvaluator = $ruleEvaluator;
     }
 
     /**
@@ -24,7 +23,7 @@ class SurveyService implements SurveyServiceInterface
      * @param Survey $survey
      * @return bool
      */
-    public function eveluateSurveyForm(Collection $payload, Survey $survey) : bool
+    public function eveluateSurveyForm(Collection $payload, Survey $survey): bool
     {
         //get sections from the survey
         $sections = $survey->sections;
@@ -33,23 +32,19 @@ class SurveyService implements SurveyServiceInterface
         $isValid = true;
 
         //get all the rules from the section and push it to the single array
-        foreach ($sections as $section)
-        {
-            //if the section rule is mandatory but i'm removing as some of the faker data has optional value
+        foreach ($sections as $section) {
+            //if the section rule is mandatory and payload name is same
             if ($section->status == "mandatory" || isset($payload[$section->name])) {
-
                 //NOTE: I'm bit unsure of few lines in the task sheet as one para says
                 //      "class should process each rule, Evaluates the payload according the rule and aggreggate the response in to single boolean"
                 //      But then, I see, rule evaluator interface which is supposed to handle the validation
                 //      since, i've already implemented the validation, I'm checking if the interface is available if not then use my validation
-                if($this->ruleEvaluator) {
+                if ($this->ruleEvaluator) {
                     $isValid = $this->ruleEvaluator->evaluate($payload);
-                }
-                else {
+                } else {
                     //this is my impletation for the validation
                     $isValid = $this->validate($payload, $section);
                 }
-
             } else {
                 return false;
             }
@@ -68,26 +63,24 @@ class SurveyService implements SurveyServiceInterface
     {
         $rules = [];
 
-        if(isset($section->rules))
-        {
-            foreach($section->rules as $rule){
+        if (isset($section->rules)) {
+            foreach ($section->rules as $rule) {
                 //unserialise the rules and push the rules array
                 $temp = unserialize($rule['rule']);
                 array_push($rules, array_pop($temp));
             }
             // foreach payload value, we'll loop through and apply the rules on it
-            foreach($payload as $key => $value) {
-                foreach ($rules as  $rule) {
+            foreach ($payload as $key => $value) {
+                foreach ($rules as $rule) {
                     //loop through to the actual formula and apply
-                    foreach($rule as $ruleName => $formula ) {
-                        if($key == $ruleName) {
+                    foreach ($rule as $ruleName => $formula) {
+                        if ($key == $ruleName) {
                             //use laravel validator
                             $validator = Validator::make(['field' => $value], [
                                 'field' => $formula,
                             ]);
 
-                            if ($validator->fails())
-                            {
+                            if ($validator->fails()) {
                                 //if validator fails then show a detailed message to dev
                                 //dump("validator failed for following value and formula:: ");
                                 //dump($value); dump($formula);

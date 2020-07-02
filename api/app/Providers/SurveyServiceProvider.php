@@ -2,11 +2,9 @@
 
 namespace App\Providers;
 
-
 use App\Services;
 use App\Services\SurveyServiceInterface;
 use Illuminate\Support\ServiceProvider;
-
 
 class SurveyServiceProvider extends ServiceProvider
 {
@@ -21,7 +19,6 @@ class SurveyServiceProvider extends ServiceProvider
         //by this, whenever I call this interface it will evaluate the payload
         $this->app->bind(\ruleEvaluatorInterface::class, Services\ruleEvaluatorService::class);
         $this->app->bind(SurveyServiceInterface::class, SurveyService::class);
-
     }
 
     /**

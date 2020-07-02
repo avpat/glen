@@ -10,5 +10,4 @@ interface ruleEvaluatorInterface
 {
 
     public function evaluate(Collection $payload): bool;
-
 }

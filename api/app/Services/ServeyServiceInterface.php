@@ -8,6 +8,5 @@ use Illuminate\Support\Collection;
 interface SurveyServiceInterface
 {
 
-    public function eveluateSurveyForm(Collection $payload, Survey $survey) : bool;
-
+    public function eveluateSurveyForm(Collection $payload, Survey $survey): bool;
 }
