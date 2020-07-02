@@ -17,18 +17,6 @@ class SurveyServiceProvider extends ServiceProvider
     public function register()
     {
         //these get called after all the services load
-//        $this->app->bind(SurveyServiceInterface::class, function ($app){
-//            return new SurveyService();
-//        });
-//        app()->bind('hello', function(){
-//           return 'HIiiiii';
-//        });
-
-//        $this->app->singleton(
-//            SurveyService::class, function ($app){
-//                return new \App\Services\SurveyService\SurveyService();
-//            }
-//        );
         //by this, whenever I call this interface it will evaluate the payload
           $this->app->bind(SurveyServiceInterface::class, SurveyService::class);
     }
