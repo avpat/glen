@@ -12,6 +12,6 @@ class SurveyTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Survey::class, 3)->create();
+        factory(App\Survey::class, 1)->create();
     }
 }
