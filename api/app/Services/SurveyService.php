@@ -11,6 +11,11 @@ class SurveyService implements SurveyServiceInterface
 
     private $ruleEvaluator;
 
+    /**
+     * SurveyService constructor.
+     * @param \ruleEvaluatorInterface $ruleEvaluator
+     *
+     */
     public function __construct(\ruleEvaluatorInterface $ruleEvaluator)
     {
         $this->ruleEvaluator = $ruleEvaluator;

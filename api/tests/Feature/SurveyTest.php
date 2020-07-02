@@ -75,7 +75,7 @@ class SurveyTest extends TestCase
     }
 
     /**
-     *
+     * validation test
      */
     public function testValidate()
     {
