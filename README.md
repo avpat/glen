@@ -1,36 +1,81 @@
-# docker-compose-laravel
-A pretty simplified docker-compose workflow that sets up a LEMP network of containers for local Laravel development. You can view the full article that inspired this repo [here](https://medium.com/@aschmelyun).
+
+# Glenhawk coding test
+
+##task
+Kindly see my code in the API folder.
 
 
-## Usage
+***
 
-To get started, make sure you have [Docker installed](https://docs.docker.com/docker-for-mac/install/) on your system, and then clone this repository.
+**Table of Contents**
 
-First add your entire Laravel project to the `src` folder, then open a terminal and from this cloned respository's root run `docker-compose up -d --build`. Open up your browser of choice to [http://localhost:8080](http://localhost:8080) and you should see your Laravel app running as intended. **Your Laravel app needs to be in the src directory first before bringing the containers up, otherwise the artisan container will not build, as it's missing the appropriate file.** 
 
-**New:** Three new containers have been added that handle Composer, NPM, and Artisan commands without having to have these platforms installed on your local computer. Use the following command templates from your project root, modifiying them to fit your particular use case:
+* [Prerequisites](#prerequisites)
+* [About your implementation](#about-your-implementation)
+* [Dev environment](#the-installation)
+* [The task](#the-task)
+* [About me](#about-me)
+* [comments](#comments)
 
-- `docker-compose run --rm composer update`
-- `docker-compose run --rm npm run dev`
-- `docker-compose run --rm artisan migrate` 
 
-Containers created and their ports (if used) are as follows:
+<a id="prerequisites"></a>
+##Prerequisites
 
-- **nginx** - `:8080`
-- **mysql** - `:3306`
-- **php** - `:9000`
-- **npm**
-- **composer**
-- **artisan**
+I've used docker.
+- php 7.4
+- mysql 5.6
 
-## Persistent MySQL Storage
 
-By default, whenever you bring down the docker-compose network, your MySQL data will be removed after the containers are destroyed. If you would like to have persistent data that remains after bringing containers down and back up, do the following:
+<a id="the-installation"></a>
+##Docker-compose Installation Notes
 
-1. Create a `mysql` folder in the project root, alongside the `nginx` and `src` folders.
-2. Under the mysql service in your `docker-compose.yml` file, add the following lines:
+- Run a docker desktop on your machine
+- Goto your project's root folder
+- create a .env file and add database connections/duplicate sample .env file and add connections below
 
-```
-volumes:
-  - ./mysql:/var/lib/mysql
-```
+        DB_CONNECTION=mysql
+        
+        DB_HOST=mysql
+        
+        DB_PORT=3306
+        
+        DB_DATABASE=glenhawkapi
+        
+        DB_USERNAME=glenhawkapi
+        
+        DB_PASSWORD=azertyuiop1234567890!
+
+- Run a docker build command and it should copy all the required images
+`` docker-compose build && docker-compose up -d``
+- Check if the docker container is running with following command
+``docker-compose ps``
+- If any issue occurs execute ``docker-compose down -v `` and then once again execute `` docker-compose build && docker-compose up -d``
+- if any issue occurs check folder perssions from the docker desktop
+- if everything ok then execute ``docker-compose exec php php artisan config:cache``
+- the service sgoukd be available at ``localhost:8000``
+- database relationships can be seen in data_diaagram.png file
+
+<a id="the-task"></a>
+
+##Task
+- difficulty interpretating following para
+``Your SurveyService class will need to process each rule, evaluate the payload according the rule and aggregate the response into a single boolean. Some sections are optional, and your class should be able to handle this.
+The evaluation service is already written for you, so you can call it  : ``
+- I was not sure if I need to implement rulevalidation or not. So I implemented it again.
+
+
+
+
+
+ 
+<a id="about-me"></a>
+
+## About 
+
+* **First name:** `A.V.`
+* **Last name:** `Patil`
+
+<a id="comments"></a>
+## comments/Notes
+
+- Thanks for the opportunity
