@@ -2,10 +2,11 @@
 
 namespace App\Providers;
 
-use App\Services\SurveyService\SurveyService;
-use App\Services\SurveyService\SurveyServiceInterface;
-use Illuminate\Support\Facades\App;
+
+use App\Services;
+use App\Services\SurveyServiceInterface;
 use Illuminate\Support\ServiceProvider;
+
 
 class SurveyServiceProvider extends ServiceProvider
 {
@@ -18,7 +19,9 @@ class SurveyServiceProvider extends ServiceProvider
     {
         //these get called after all the services load
         //by this, whenever I call this interface it will evaluate the payload
-          $this->app->bind(SurveyServiceInterface::class, SurveyService::class);
+        $this->app->bind(\ruleEvaluatorInterface::class, Services\ruleEvaluatorService::class);
+        $this->app->bind(SurveyServiceInterface::class, SurveyService::class);
+
     }
 
     /**
