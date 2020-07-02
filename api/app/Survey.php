@@ -10,7 +10,7 @@ class Survey extends Model
 
     protected  $fillable = ['name', 'description'];
 
-    protected $with = [ 'sections'];
+    protected $with = [ 'sections.rules'];
 
     /**
      * Each survey has many sections
