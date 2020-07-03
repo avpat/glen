@@ -54,10 +54,96 @@ I've used docker.
 <a id="the-task"></a>
 
 ##Task
-- difficulty interpretating following para
-``Your SurveyService class will need to process each rule, evaluate the payload according the rule and aggregate the response into a single boolean. Some sections are optional, and your class should be able to handle this.
-The evaluation service is already written for you, so you can call it  : ``
-- I was not sure if I need to implement rulevalidation or not. So I implemented it again.
+Task
+Write a survey service class that takes a payLoad (a collection of key values pairs) and an eligibility survey (collection of rules), evaluates them and returns a boolean response of that evaluation.
+There will be a survey table with a name, description columns and one-to-many relationship on the sections table. Sections have name and description. Some sections are optional and should be marked as such. Sections will consist of the rules for evaluation. As rules can be reused in different eligibility survey. This is a many-to-many relationship.
+Your SurveyService class will need to process each rule, evaluate the payload according the rule and aggregate the response into a single boolean. Some sections are optional, and your class should be able to handle this.
+The evaluation service is already written for you, so you can call it  : 
+$ruleEvaluator->evaluate(Collection $payload) bool $result 
+The payLoad is passed as a collection of <key;value> pairs.
+The rules should be left as a simple class with an id and a string as the ConditionEvaluator will decode them. 
+Example
+Payload
+Key
+Value
+Annual Income
+30,000
+Borrower Trustworthiness
+Trustworthy
+Borrower Age
+27
+Loan Length in Months
+12
+Loan Amount
+90,000
+
+Survey
+Name
+Consumer Loan Eligibility Survey
+
+
+
+
+Description
+Rules that determine whether the consumer loan application should be accepted or rejected
+Section
+Borrower Age
+Optional
+
+
+
+
+Borrower Age > 21
+
+
+
+
+
+
+Borrower Age < 75
+
+
+
+
+Section 
+Affordability
+Mandatory
+
+
+
+
+Annual Income > 40,000
+
+
+
+
+
+
+Loan Amount < 3 * Annual Income
+
+
+
+
+Section 
+Finance
+Mandatory
+
+
+
+
+Loan Length in Months < 12
+
+
+
+
+
+
+Loan Amount < 500,000
+
+
+
+
+
 
 
 
