@@ -1,7 +1,5 @@
 
-# Glenhawk coding test
-
-##task
+##task: creating Interfaces
 Kindly see my code in the API folder.
 
 
@@ -56,13 +54,6 @@ I've used docker.
 - database relationships can be seen in data_diaagram.png file
 
 <a id="the-task"></a>
-
-##Task
-- difficulty interpretating following para
-``Your SurveyService class will need to process each rule, evaluate the payload according the rule and aggregate the response into a single boolean. Some sections are optional, and your class should be able to handle this.
-The evaluation service is already written for you, so you can call it  : ``
-- I was not sure if I need to implement rulevalidation or not. So I implemented it again.
-
 
 
 
